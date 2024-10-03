@@ -2,7 +2,7 @@ package com.example.testhh1.app
 
 import android.app.Application
 import com.example.testhh1.di.components.AppComponent
-import com.example.testhh1.di.DaggerAppComponent
+import com.example.testhh1.di.components.DaggerAppComponent
 
 class App : Application() {
     override fun onCreate() {
