@@ -2,6 +2,7 @@ package com.example.testhh1.di.modules
 
 import com.example.testhh1.BuildConfig
 import com.example.testhh1.data.network.NetworkServiceAPI
+import com.example.testhh1.utils.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -27,7 +28,7 @@ object NetworkModule {
     @Provides
     fun provideRetrofit(defaultClient: OkHttpClient): Retrofit = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
-        .baseUrl("https://drive.usercontent.google.com/")
+        .baseUrl(BASE_URL)
         .client(defaultClient)
         .build()
 
