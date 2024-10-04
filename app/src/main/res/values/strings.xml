@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">TestHH1</string>
+    <string name="app_name">TestHH</string>
+    <string name="error_message">Что-то пошло не так</string>
 </resources>
