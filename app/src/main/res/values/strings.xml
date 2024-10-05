@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">TestHH</string>
-    <string name="error_message">Что-то пошло не так</string>
+    <string name="error_message">Что-то пошло не так</string> insert_request
+    <string name="insert_request">Должность, ключевые слова</string>
 </resources>
