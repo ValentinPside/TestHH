@@ -7,7 +7,7 @@
     android:paddingHorizontal="8dp">
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/backImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/card_shape"
@@ -17,12 +17,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/imageView"
+        android:id="@+id/iconImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/round_shape"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView"
@@ -31,14 +33,15 @@
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/gray"
         android:textSize="13sp"
-        android:text="Временная работа или подработка"
+        android:text=""
         android:maxLines="3"
         android:paddingHorizontal="8dp"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/iconImage"
+        />
 
     <TextView
         android:id="@+id/textView2"
@@ -46,7 +49,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/gray"
         android:textSize="13sp"
-        android:text="Поднять"
+        android:text=""
         android:paddingHorizontal="8dp"
         android:textColor="@color/green"
         app:layout_constraintEnd_toEndOf="parent"

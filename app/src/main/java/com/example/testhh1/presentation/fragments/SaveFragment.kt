@@ -6,27 +6,73 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.testhh1.R
+import android.widget.Toast
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.testhh1.app.App
+import com.example.testhh1.databinding.FragmentSaveBinding
+import com.example.testhh1.presentation.VacanciesAdapter
 import com.example.testhh1.presentation.viewmodels.SaveViewModel
+import com.example.testhh1.utils.Factory
+import com.example.testhh1.utils.GrammaUtils
+import kotlinx.coroutines.launch
 
 class SaveFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = SaveFragment()
+    private var _binding: FragmentSaveBinding? = null
+    private val binding get() = _binding!!
+    private val viewModel by viewModels<SaveViewModel> {
+        Factory {
+            App.appComponent.saveComponent().viewModel()
+        }
     }
 
-    private val viewModel: SaveViewModel by viewModels()
+    private lateinit var vacanciesAdapter: VacanciesAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        // TODO: Use the ViewModel
-    }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_save, container, false)
+        _binding = FragmentSaveBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupVacanciesRecycler()
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.observeUi().collect { state ->
+                    state.vacancies?.let {
+                        vacanciesAdapter.submitList(it)
+                        binding.vacancyCountTv.text = GrammaUtils.getStringCount(it.size)
+                    }
+                    state.error?.let {
+                        Toast.makeText(
+                            requireContext(),
+                            getString(it),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun setupVacanciesRecycler() {
+        vacanciesAdapter = VacanciesAdapter()
+        binding.vacanciesRV.adapter = vacanciesAdapter
+        binding.vacanciesRV.layoutManager =
+            LinearLayoutManager(requireContext())
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

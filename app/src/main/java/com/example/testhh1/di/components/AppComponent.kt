@@ -18,6 +18,8 @@ interface AppComponent {
 
     fun searchComponent(): SearchComponent
 
+    fun saveComponent(): SaveComponent
+
     @Component.Factory
     interface AppComponentFactory {
         fun create(@BindsInstance context: Context): AppComponent
